@@ -10,9 +10,8 @@ RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/re
  && rm -rf /var/cache/apk/*
 
 # Setup the bitlbee user for the service to run as
-RUN adduser -h /var/lib/bitlbee -H -s /sbin/nologin -D bitlbee
-
-RUN mkdir /var/run/bitlbee \
+RUN adduser -h /var/lib/bitlbee -H -s /sbin/nologin -D bitlbee \
+ && mkdir /var/run/bitlbee \
  && chown bitlbee:bitlbee /var/run/bitlbee
 
 # copy over files
