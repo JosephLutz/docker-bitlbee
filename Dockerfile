@@ -26,5 +26,6 @@ VOLUME [ "/var/lib/bitlbee" ]
 EXPOSE 6667
 
 # start the entrypoint script
+WORKDIR /var/lib/bitlbee
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["bitlbee"]
