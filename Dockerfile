@@ -1,5 +1,5 @@
 FROM alpine:edge
-MAINTAINER Marvin Steadfast <marvin@xsteadfastx.org>
+MAINTAINER Joseph Lutz <Joseph.Lutz@novatechweb.com>
 
 COPY root /
 
