@@ -20,7 +20,7 @@ COPY ./docker-entrypoint.sh \
     /
 
 # specify the volumes directly related to this image
-VOLUME /data
+VOLUME [ "/var/lib/bitlbee" ]
 
 # specify which network ports will be used
 EXPOSE 6667
