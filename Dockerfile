@@ -9,10 +9,13 @@ RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/re
       su-exec \
  && rm -rf /var/cache/apk/*
 
+# Store default config and
 # Setup the bitlbee user for the service to run as
 RUN adduser -h /var/lib/bitlbee -H -s /sbin/nologin -D bitlbee \
  && mkdir /var/run/bitlbee \
- && chown bitlbee:bitlbee /var/run/bitlbee
+ && chown -R bitlbee:bitlbee /var/run/bitlbee \
+ && cd /etc/bitlbee \
+ && tar -cf /etc/bitlbee.default.config.tgz ./*
 
 # copy over files
 COPY ./docker-entrypoint.sh \

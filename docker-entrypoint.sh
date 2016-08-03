@@ -2,8 +2,14 @@
 
 case ${1} in
     bitlbee)
-    chown -R bitlbee:bitlbee /var/lib/bitlbee
-    exec su-exec bitlbee bitlbee -D -n -v -P /var/run/bitlbee/bitlbee.pid
+        if [[ ! -w /etc/bitlbee/bitlbee.conf ]]; then
+            # Restore default config
+            pushd /etc/bitlbee \
+              && tar -xf /etc/bitlbee.default.config.tgz
+            popd
+        fi
+        chown -R bitlbee:bitlbee /var/lib/bitlbee
+        exec su-exec bitlbee bitlbee -D -n -v -P /var/run/bitlbee/bitlbee.pid
         ;;
 
     *)
