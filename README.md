@@ -15,3 +15,22 @@ $ docker run -v /opt/bitlbee/config:/etc/bitlbee -v /opt/bitlbee/users:/var/lib/
 ```
 
 Connect your irc client to `localhost:6777` and have fun.
+
+
+# commands I used to create the images
+```
+docker build --rm --tag docker-bitlbee:latest $(pwd) \
+ && docker 2>&1 run --name docker-bitlbee-DV --entrypoint /bin/true docker-bitlbee:latest \
+ && docker 2>&1 run -d --restart=always --name docker-bitlbee --volumes-from docker-bitlbee-DV -p :6667:6667 docker-bitlbee:latest
+```
+
+# Create backup
+```
+docker exec -i docker-bitlbee /docker-entrypoint.sh backup > bitlbee.backup.tar
+```
+
+# Restore a backup
+```
+docker exec -i docker-bitlbee /docker-entrypoint.sh restore < bitlbee.backup.tar
+docker restart docker-bitlbee
+```
